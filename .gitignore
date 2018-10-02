@@ -1,0 +1,4 @@
+.idea
+app/vendor
+var/logs/
+var/elasticsearch/

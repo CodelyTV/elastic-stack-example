@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    container_name: elasticsearch
+    ports: ['9200:9200']
+    volumes:
+      - './var/elasticsearch:/usr/share/elasticsearch/data'
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.4.2
+    container_name: logstash
+    ports: ['9600:9600']
+    depends_on: ['elasticsearch']
+    volumes:
+      - './etc/logstash/pipeline:/usr/share/logstash/pipeline'
+      - './var/logs:/logs'
