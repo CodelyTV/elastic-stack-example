@@ -17,5 +17,5 @@ before_script:
   - docker-compose up -d
 
 script:
-  - sudo chmod 777 -R var/logs
+  - sudo chmod -R 777 var/logs
   - cd app && php app.php -a fo1 -b bar
