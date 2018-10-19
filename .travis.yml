@@ -1,0 +1,11 @@
+language: php
+sudo: required
+
+services:
+  - docker
+
+before_script:
+  - docker-compose up -d
+
+script:
+  - php app/app.php -a fo1 -b bar
