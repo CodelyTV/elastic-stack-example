@@ -30,7 +30,6 @@ $elasticaClient = new \Elastica\Client(
 $elasticsearchHandler = new \Monolog\Handler\ElasticSearchHandler($elasticaClient);
 //$log->pushHandler($elasticsearchHandler);
 
-
 // My Application
 $options = getopt('a:b:');
 
