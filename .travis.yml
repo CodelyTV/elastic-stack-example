@@ -13,8 +13,9 @@ services:
   - docker
 
 before_script:
-  - cd app && composer install
+  - cd app && composer install && cd ..
   - docker-compose up -d
 
 script:
-  - php app.php -a fo1 -b bar
+  - cd var && mkdir logs && sudo chmod 777 -R logs && cd ..
+  - cd app && php app.php -a fo1 -b bar
