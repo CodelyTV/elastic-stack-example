@@ -17,4 +17,4 @@ before_script:
   - docker-compose up -d
 
 script:
-  - cd app && php app.php -a fo1 -b bar
+  - php app.php -a fo1 -b bar
