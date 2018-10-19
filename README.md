@@ -10,7 +10,8 @@ to initialize all the needed services.
 
 Run
 
-``cd app && composer install``
-``php app/app.php -a fo1 -b bar``
+```cd app && composer install```
+
+```php app/app.php -a fo1 -b bar```
 
 to execute the PHP sample application
