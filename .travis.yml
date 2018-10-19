@@ -1,6 +1,11 @@
 language: php
 sudo: required
 
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+
 services:
   - docker
 
