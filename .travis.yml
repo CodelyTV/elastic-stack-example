@@ -1,6 +1,9 @@
 language: php
 sudo: required
 
+php:
+  - '7.0'
+
 notifications:
   email:
     on_success: never
@@ -10,8 +13,8 @@ services:
   - docker
 
 before_script:
-  - docker-compose up -d
   - cd app && composer install
+  - docker-compose up -d
 
 script:
   - php app/app.php -a fo1 -b bar
