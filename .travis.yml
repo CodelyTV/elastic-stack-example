@@ -6,6 +6,7 @@ services:
 
 before_script:
   - docker-compose up -d
+  - cd app && composer install
 
 script:
   - php app/app.php -a fo1 -b bar
