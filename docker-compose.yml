@@ -20,6 +20,7 @@ services:
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:6.4.2
+    container_name: filebeat
     user: root
     volumes:
       - './var/filebeat/log/:/var/log/:ro'
@@ -30,6 +31,7 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana:6.4.2
+    container_name: kibana
     ports: ['5601:5601']
     depends_on:
       - 'elasticsearch'
