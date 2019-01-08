@@ -2,6 +2,7 @@ logging.level: info
 logging.to_files: false
 
 #------------------------------ Log input --------------------------------
+filebeat.inputs:
  - type: log
    enabled: true
    paths:
