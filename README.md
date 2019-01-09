@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/CodelyTV/elastic-stack-docker-example.svg?branch=master)](https://travis-ci.org/CodelyTV/elastic-stack-docker-example)
+
 # Elastic Stack with Docker (PHP sample App)
 
 Simple PHP Application using Elastic Stack running with Docker.
