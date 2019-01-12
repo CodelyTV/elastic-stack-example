@@ -2,7 +2,7 @@ language: php
 sudo: required
 
 php:
-  - '7.1.16'
+  - '7.3'
 
 notifications:
   email:
@@ -18,4 +18,4 @@ before_script:
 
 script:
   - sudo chmod -R 777 var/logs
-  - cd app && php app.php -a fo1 -b bar
+  - cd app/php && php app.php -a fo1 -b bar
