@@ -1,4 +1,4 @@
-package tv.codely.java_bootstrap;
+package tv.codely.elastic_stack_example;
 
 public class Greeter {
 
