@@ -28,21 +28,23 @@ $elasticaClient = new \Elastica\Client(
 );
 
 $elasticsearchHandler = new \Monolog\Handler\ElasticSearchHandler($elasticaClient);
-//$log->pushHandler($elasticsearchHandler);
+$log->pushHandler($elasticsearchHandler);
 
 // My Application
 $options = getopt('a:b:');
 
-if ($options['a'] != 'foo') {
-    $log->warn('Input parameter a is not foo', ['parameter' => 'a', 'value' => $options['a'] ]);
+# App Servidor A
+if ($options['a'] == 'warning') {
+    $log->warn('Esto es un Warning', ['Servidor' => 'Servidor A']);
 } else {
-    $log->info('Input parameter a is foo', ['parameter' => 'a', 'value' => $options['a'] ]);
+    $log->info('Esto es un Info', ['Servidor' => 'Servidor A']);
 }
 
-if ($options['b'] != 'bar') {
-    $log->error('Input parameter b is not bar', ['parameter' => 'b', 'value' => $options['b'] ]);
+# App Servidor B
+if ($options['b'] == 'error') {
+    $log->error('Esto es un Error', ['Servidor' => 'Servidor B']);
 } else {
-    $log->info('Input parameter b is bar', ['parameter' => 'b', 'value' => $options['b'] ]);
+    $log->info('Esto es un Info', ['Servidor' => 'Servidor B']);
 }
 
 
