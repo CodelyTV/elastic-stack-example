@@ -17,7 +17,7 @@ jobs:
       - name: Run docker-compose
         run: docker-compose up -d
       - name: Wait
-        run: sleep 15
+        run: sleep 30
       - name: Elasticsearch Health
         run: curl http://localhost:9200/_cat/health
       - name: Kibana status
