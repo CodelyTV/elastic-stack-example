@@ -1,0 +1,32 @@
+name: Build Elastic Stack
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Configure VM for Elasticsearch
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+      - name: Run docker-compose
+        run: docker-compose up -d elasticsearch kibana
+      - name: Wait
+        run: sleep 30
+      - name: Elasticsearch Health
+        run: curl http://localhost:9200/_cat/health
+      - name: Kibana status
+        run: curl http://localhost:5601/api/status
+      - name: PHP - Composer install
+        run: cd app/php && composer install
+      - name: PHP - Test app
+        run: php app/php/app.php -a fo1 -b bar

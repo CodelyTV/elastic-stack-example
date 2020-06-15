@@ -1,7 +1,6 @@
 logging.level: info
 logging.to_files: false
 
-#------------------------------ Log input --------------------------------
 filebeat.inputs:
  - type: log
    enabled: true
@@ -14,16 +13,7 @@ filebeat.inputs:
          fields: ['message']
          target: json
 
-#========================== Elasticsearch output ===============================
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
   username: elastic
   password: changeme
-
-#============================== Dashboards =====================================
-#setup.dashboards:
-#  enabled: true
-#setup.kibana:
-#  host: "kibana:80"
-#  username: elastic
-#  password: changeme

@@ -1,17 +1,29 @@
-version: '3.3'
+version: '3.7'
 
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
     container_name: elasticsearch
     ports: ['9200:9200']
+    environment:
+      - "ELASTIC_PASSWORD=elastic"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "discovery.type=single-node"
+      - "TAKE_FILE_OWNERSHIP=1"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
       - './var/elasticsearch:/usr/share/elasticsearch/data'
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.4.2
+    image: docker.elastic.co/logstash/logstash:7.5.0
     container_name: logstash
+    environment:
+      - "ELASTIC_PASSWORD=elastic"
     ports: ['9600:9600']
     depends_on: ['elasticsearch']
     volumes:
@@ -19,8 +31,10 @@ services:
       - './var/logs:/logs'
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:6.4.2
+    image: docker.elastic.co/beats/filebeat:7.5.0
     container_name: filebeat
+    environment:
+      - "ELASTIC_PASSWORD=elastic"
     user: root
     volumes:
       - './var/filebeat/log/:/var/log/:ro'
@@ -30,9 +44,11 @@ services:
     command: ["--strict.perms=false"]
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.4.2
+    image: docker.elastic.co/kibana/kibana:7.5.0
     container_name: kibana
+    environment:
+      - "ELASTIC_PASSWORD=elastic"
     ports: ['5601:5601']
     depends_on:
-      - 'elasticsearch'
+      - elasticsearch
 
