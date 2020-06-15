@@ -9,7 +9,7 @@ services:
     environment:
       - "ELASTIC_PASSWORD=elastic"
       - "bootstrap.memory_lock=true"
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - "discovery.type=single-node"
       - "TAKE_FILE_OWNERSHIP=1"
     ulimits:

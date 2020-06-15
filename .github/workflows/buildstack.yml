@@ -13,9 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Configure VM for Elasticsearch
-        run: sudo sysctl -w vm.max_map_count=262144
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
       - name: Run docker-compose
-        run: docker-compose up -d
+        run: docker-compose up -d elasticsearch kibana
       - name: Wait
         run: sleep 30
       - name: Elasticsearch logs
