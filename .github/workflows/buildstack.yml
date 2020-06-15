@@ -22,8 +22,6 @@ jobs:
         run: docker-compose up -d elasticsearch kibana
       - name: Wait
         run: sleep 30
-      - name: Elasticsearch logs
-        run: docker-compose logs elasticsearch
       - name: Elasticsearch Health
         run: curl http://localhost:9200/_cat/health
       - name: Kibana status
