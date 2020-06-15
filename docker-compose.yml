@@ -10,6 +10,8 @@ services:
       - "ELASTIC_PASSWORD=elastic"
       - "bootstrap.memory_lock=true"
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "discovery.type=single-node"
+      - "TAKE_FILE_OWNERSHIP=1"
     ulimits:
       memlock:
         soft: -1
