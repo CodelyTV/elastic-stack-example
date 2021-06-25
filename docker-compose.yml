@@ -38,7 +38,7 @@ services:
     user: root
     volumes:
       - './var/filebeat/log/:/var/log/:ro'
-      - './var/filebeat/docker.sock:/var/run/docker.sock'
+      - '/var/run/docker.sock:/var/run/docker.sock'
       - './var/logs/:/var/lib/docker/containers/logs:ro'
       - './etc/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml'
     command: ["--strict.perms=false"]
@@ -52,3 +52,19 @@ services:
     depends_on:
       - elasticsearch
 
+  composer:
+    image: composer:2.1
+    container_name: composer
+    working_dir: /app
+    volumes:
+      - './app/php:/app'
+
+  php:
+    image: php:8.0-fpm
+    container_name: php
+    working_dir: /app
+    depends_on:
+      - elasticsearch
+    volumes:
+      - './app/php:/app'
+      - './var/logs:/logs'
