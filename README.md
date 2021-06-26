@@ -14,11 +14,11 @@ docker-compose up -d
 Install needed PHP dependencies
 
 ```
-cd app && composer install
+docker-compose run --rm composer composer install --ignore-platform-reqs
 ```  
 
 Execute the PHP sample application
 
 ```
-php app/php/app.php -a fo1 -b bar
+docker-compose run --rm php php app.php -a fo1 -b bar
 ```

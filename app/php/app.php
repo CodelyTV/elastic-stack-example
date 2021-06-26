@@ -19,7 +19,7 @@ $stdoutHandler->setFormatter($formatter);
 $log->pushHandler($stdoutHandler);
 
 // File Handler
-$fileHandler = new RotatingFileHandler('../var/logs/app.log', 0, Logger::DEBUG);
+$fileHandler = new RotatingFileHandler('/logs/app.log', 0, Logger::DEBUG);
 $formatter = new JsonFormatter();
 $fileHandler->setFormatter($formatter);
 $log->pushHandler($fileHandler);
@@ -27,7 +27,7 @@ $log->pushHandler($fileHandler);
 // Elasticsearch Handler
 $elasticaClient = new Client(
     [
-        'host' => 'localhost',
+        'host' => 'elasticsearch',
         'port' => 9200
     ]
 );
