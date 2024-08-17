@@ -6,7 +6,7 @@
 To initialize all the needed services.
 
 ```
-docker-compose up -d 
+docker compose up -d 
 ```  
 
 ## How to run PHP sample app
