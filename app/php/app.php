@@ -5,7 +5,6 @@ require __DIR__ . '/vendor/autoload.php';
 use Monolog\Logger;
 use Elastica\Client;
 use Monolog\Formatter\JsonFormatter;
-use Monolog\Handler\ElasticSearchHandler;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -19,7 +18,7 @@ $stdoutHandler->setFormatter($formatter);
 $log->pushHandler($stdoutHandler);
 
 // File Handler
-$fileHandler = new RotatingFileHandler('../var/logs/app.log', 0, Logger::DEBUG);
+$fileHandler = new RotatingFileHandler(__DIR__.'/logs/app.log', 0, \Monolog\Level::Debug);
 $formatter = new JsonFormatter();
 $fileHandler->setFormatter($formatter);
 $log->pushHandler($fileHandler);
@@ -27,12 +26,20 @@ $log->pushHandler($fileHandler);
 // Elasticsearch Handler
 $elasticaClient = new Client(
     [
-        'host' => 'localhost',
-        'port' => 9200
+        'host' => 'elasticsearch',
+        'port' => 9200,
+        'transport' => 'http',
+        'username' => 'elastic',
+        'password' => 'password',
+        'auth' => ["elastic", "password"],
+        'hosts' => ['elasticsearch:9200'],
     ]
 );
 
-$elasticsearchHandler = new ElasticSearchHandler($elasticaClient);
+$elasticsearchHandler = new \Monolog\Handler\ElasticaHandler($elasticaClient, ['index' => 'codelytv', 'type' => 'record']);
+
+// Register Handlers
+$log->pushHandler($stdoutHandler);
 $log->pushHandler($elasticsearchHandler);
 
 // My Application

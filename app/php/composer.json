@@ -1,6 +1,11 @@
 {
     "require": {
-        "monolog/monolog": "^1.23",
-        "ruflin/elastica": "^6.0"
+        "ruflin/elastica": "^8.1",
+        "monolog/monolog": "^3.9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
