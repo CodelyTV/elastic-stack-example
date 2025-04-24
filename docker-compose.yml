@@ -25,12 +25,6 @@ services:
     depends_on:
       - elasticsearch
 
-  java:
-    image: openjdk:17-jdk
-  command: tail -f /dev/null
-  depends_on:
-      - elasticsearch
-
   logstash:
     image: docker.elastic.co/logstash/logstash:8.1.0
     container_name: logstash
