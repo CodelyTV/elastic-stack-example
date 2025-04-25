@@ -15,13 +15,11 @@ $log = new Logger('logger');
 $stdoutHandler = new ErrorLogHandler();
 $formatter = new JsonFormatter();
 $stdoutHandler->setFormatter($formatter);
-$log->pushHandler($stdoutHandler);
 
 // File Handler
 $fileHandler = new RotatingFileHandler(__DIR__.'/logs/app.log', 0, \Monolog\Level::Debug);
 $formatter = new JsonFormatter();
 $fileHandler->setFormatter($formatter);
-$log->pushHandler($fileHandler);
 
 // Elasticsearch Handler
 $elasticaClient = new Client(
@@ -29,9 +27,6 @@ $elasticaClient = new Client(
         'host' => 'elasticsearch',
         'port' => 9200,
         'transport' => 'http',
-        'username' => 'elastic',
-        'password' => 'password',
-        'auth' => ["elastic", "password"],
         'hosts' => ['elasticsearch:9200'],
     ]
 );
@@ -39,6 +34,7 @@ $elasticaClient = new Client(
 $elasticsearchHandler = new \Monolog\Handler\ElasticaHandler($elasticaClient, ['index' => 'codelytv', 'type' => 'record']);
 
 // Register Handlers
+$log->pushHandler($fileHandler);
 $log->pushHandler($stdoutHandler);
 $log->pushHandler($elasticsearchHandler);
 
@@ -47,7 +43,7 @@ $options = getopt('a:b:');
 
 # App Servidor A
 if ($options['a'] === 'warning') {
-    $log->warn('Esto es un Warning', ['Servidor' => 'Servidor A']);
+    $log->warning('Esto es un nuevo Warning', ['Servidor' => 'Servidor A']);
 } else {
     $log->info('Esto es un Info', ['Servidor' => 'Servidor A']);
 }

@@ -21,7 +21,7 @@ services:
     volumes:
       - './app/php:/app'
       - './volumes/php/vendor:/app/vendor'
-      - './volumes/php/logs:/app/logs'
+      - './volumes/logstash/logs:/app/logs'
     depends_on:
       - elasticsearch
 
