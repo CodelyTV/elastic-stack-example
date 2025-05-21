@@ -11,11 +11,11 @@ docker-compose up -d
 
 ## How to run PHP sample app
 
-Install needed PHP dependencies
+Install needed PHP dependencies from the repository root:
 
 ```
-cd app && composer install
-```  
+cd app/php && composer install
+```
 
 Execute the PHP sample application
 
