@@ -16,4 +16,4 @@ filebeat.inputs:
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
   username: elastic
-  password: changeme
+  password: elastic
